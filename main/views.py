@@ -1,10 +1,17 @@
 from http.client import HTTPResponse
+from turtle import title
 from django.shortcuts import render
 from django.http import HttpResponse
 
 
 def index(request):
-    return render(request, 'main/index.html')
+    context = {'title': 'Home - Главная',
+               'content': 'Кондитерский цех Slastena.ru',
+               }
+    return render(request, 'main/index.html', context)
 
 def about(request):
-    return HttpResponse('About page')
+    context = {'title': 'Home - О нас',
+               'content': 'Кондитерский цех Slastena.ru',
+               }
+    return render(request, 'main/about.html', context)

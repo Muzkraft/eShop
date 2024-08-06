@@ -7,24 +7,23 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href= {% static "deps/css/bootstrap/bootstrap.min.css" %}>
-    <link rel="stylesheet" href={% static "deps/css/my_css.css" %}>
+    <link rel="stylesheet" href="deps/css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="deps/css/my_css.css">
     {% block css %}
     {% endblock css %}
-
     <!-- Favicons for different platforms -->
-    <link rel="apple-touch-icon" sizes="180x180" href={% static "deps/favicon/apple-touch-icon.png" %}>
-    <link rel="icon" type="image/png" sizes="32x32" href={% static "deps/favicon/favicon-32x32.png" %}>
-    <link rel="icon" type="image/png" sizes="16x16" href={% static "deps/favicon/favicon-16x16.png" %}>
-    <link rel="manifest" href={% static "deps/favicon/site.webmanifest" %}>
-    <title>Дом</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="deps/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="deps/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="deps/favicon/favicon-16x16.png">
+    <link rel="manifest" href="deps/favicon/site.webmanifest">
+    <title>{{ title }}</title>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand" href={% url "main:index" %}>Домой</a>
+                <a class="navbar-brand" href="index.html">Home</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +39,7 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item  text-white" href="#">Доставка и оплата</a></li>
                                 <li><a class="dropdown-item  text-white" href="#">Контактная информация</a></li>
-                                <li><a class="dropdown-item  text-white" href={% url "main:about" %}>Про нас</a></li>
+                                <li><a class="dropdown-item  text-white" href="#">Про нас</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
@@ -83,24 +82,24 @@
                     <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
                         Каталог
-                        <img class="mx-1" src={% static "deps/icons/grid-fill.svg" %} alt="Catalog Icon" width="16"
+                        <img class="mx-1" src="deps/icons/grid-fill.svg" alt="Catalog Icon" width="16"
                             height="16">
                     </button>
                     <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Все товары</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Кухня</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Спальня</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Гостинная</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Офис</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Фурнитура</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Декор</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">Все товары</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">Кухня</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">Спальня</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">Гостинная</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">Офис</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">Фурнитура</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url "catalog:index" %}">Декор</a></li>
                     </ul>
                 </div>
                 <!-- Значек корзины, вызывает модальное окно -->
                 <div>
                     <button type="button" class="btn btn-dark btn-secondary d-flex" id="modalButton"
                         aria-expanded="false">
-                        <img class="mx-1" src={% static "deps/icons/basket2-fill.svg" %} alt="Catalog Icon" width="24"
+                        <img class="mx-1" src="deps/icons/basket2-fill.svg" alt="Catalog Icon" width="24"
                             height="24">
                         <span id="goods-in-cart-count">0</span>
                     </button>
@@ -145,7 +144,7 @@
                                                     <div class="col p-0"><strong>100.00 $</strong></div>
                                                     <div class="col p-0">
                                                         <a href="#" class="remove-from-cart" data-cart-id="">
-                                                            <img class="mx-1" src={% static "deps/icons/trash3-fill.svg" %}
+                                                            <img class="mx-1" src="deps/icons/trash3-fill.svg"
                                                                 alt="Catalog Icon" width="16" height="16">
                                                         </a>
                                                     </div>
@@ -179,27 +178,19 @@
                 </div>
                 <div class="col-lg-10">
                     <!-- Контент на странице -->
-                    <h1 class="mt-5 pt-5"><strong>Кондитерский цех Slastena.ru</strong></h1>
+                    {% block content %}{% endblock content %}
                 </div>
             </div>
         </div>
     </section>
-    {% block footer %}
-        <footer class="py-4 bg-dark">
-            <div class="container">
-                <p class="m-0 text-center text-white">Copyright &copy; Сергей Псковитин 2024</p>
-            </div>
-        </footer>
-    
-    {% endblock footer %}
-  
-    {% block scripts %}
-        <script src={% static "deps/js/jquery/jquery-3.7.0.min.js" %}></script>
-        <script src={% static "deps/js/jquery-events.js" %}></script>
-        <script src={% static "deps/js/jquery-ajax.js" %}></script>
-        <script src={% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}></script>
-    {% endblock scripts %}
 
+
+    {% block footer %}{% endblock %}
+  
+    <script src={% static "deps/js/jquery/jquery-3.7.0.min.js" %}></script>
+    <script src={% static "deps/js/jquery-events.js" %}></script>
+    <script src={% static "deps/js/jquery-ajax.js" %}></script>
+    <script src={% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}></script>
 </body>
 
-</html>
+</html>    
