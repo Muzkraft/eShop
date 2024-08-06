@@ -1,21 +1,30 @@
-{% extends "main/base.html" %}
 {% load static %}
 
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href= {% static "deps/css/bootstrap/bootstrap.min.css" %}>
+    <link rel="stylesheet" href={% static "deps/css/my_css.css" %}>
     {% block css %}
-        <!-- Стиль footer-a для главной страницы -->
-        <link rel="stylesheet" href={% static "deps/css/my_footer_css.css" %}>
-    {% endblock %}
+    {% endblock css %}
 
-    <title>Дом-Главная</title>
+    <!-- Favicons for different platforms -->
+    <link rel="apple-touch-icon" sizes="180x180" href={% static "deps/favicon/apple-touch-icon.png" %}>
+    <link rel="icon" type="image/png" sizes="32x32" href={% static "deps/favicon/favicon-32x32.png" %}>
+    <link rel="icon" type="image/png" sizes="16x16" href={% static "deps/favicon/favicon-16x16.png" %}>
+    <link rel="manifest" href={% static "deps/favicon/site.webmanifest" %}>
+    <title>Дом</title>
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
             <div class="container">
-                <a class="navbar-brand" href="{% url "main:index" %}">Домой</a>
+                <a class="navbar-brand" href={% url "main:index" %}>Домой</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -175,6 +184,22 @@
             </div>
         </div>
     </section>
+    {% block footer %}
+        <footer class="py-4 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; Сергей Псковитин 2024</p>
+            </div>
+        </footer>
+    
+    {% endblock footer %}
+  
+    {% block scripts %}
+        <script src={% static "deps/js/jquery/jquery-3.7.0.min.js" %}></script>
+        <script src={% static "deps/js/jquery-events.js" %}></script>
+        <script src={% static "deps/js/jquery-ajax.js" %}></script>
+        <script src={% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}></script>
+    {% endblock scripts %}
+
 </body>
 
 </html>
