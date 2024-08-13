@@ -1,4 +1,3 @@
-from tabnanny import verbose
 from django.db import models
 
 class Categories(models.Model):
@@ -11,7 +10,7 @@ class Categories(models.Model):
         verbose_name_plural = 'Категории'
         
     def __str__(self) -> str:
-        return self.name
+        return f'{self.name}'
         
 
 class Products(models.Model):
@@ -30,6 +29,14 @@ class Products(models.Model):
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
         
-        def __str__(self) -> str:
-            return f'{self.name} Количество - {self.quantity}'
+    def __str__(self) -> str:
+        return f'{self.name} Количество - {self.quantity}'
         
+    def display_id(self):
+        return f'{self.pk:05}'
+    
+    def sell_price(self):
+        if self.discount:
+            return round(self.price - self.price * self.discount/100, 2)
+        
+        return self.price
