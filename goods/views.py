@@ -1,4 +1,3 @@
-from tkinter import N
 from django.core import paginator
 from django.shortcuts import render, get_list_or_404
 from django.core.paginator import Paginator
