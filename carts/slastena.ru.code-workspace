@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"git.autoRepositoryDetection": "subFolders",
+		"breadcrumbs.enabled": true,
+		"debug.autoExpandLazyVariables": true,
+		"debug.inlineValues": "on",
+		"python.languageServer": "Pylance",
+		"emmet.includeLanguages": {
+			"django-html": "html"
+		},
+		"files.associations": {
+			"**/*.html": "html",
+			"**/templates/*/*.html": "django-html",
+			"**/templates/*/*/*.html": "django-html",
+			"**/templates/*": "django-html",
+			"**/requirements{/**,*}.{txt,in}": "pip-requirements"
+		},
+		"django.snippets.exclude": [
+			"cms",
+			"wagtail"
+		],
+		"terminal.integrated.detectLocale": "off"
+	}
+}

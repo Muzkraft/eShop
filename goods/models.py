@@ -10,9 +10,10 @@ class Categories(models.Model):
         db_table = "category"
         verbose_name = "Категорию"
         verbose_name_plural = "Категории"
+        ordering = ("id",)
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return self.name
 
 
 class Products(models.Model):
@@ -43,10 +44,9 @@ class Products(models.Model):
 
     def __str__(self) -> str:
         return f"{self.name} Количество - {self.quantity}"
-    
+
     def get_absolute_url(self):
         return reverse("catalog:product", kwargs={"product_slug": self.slug})
-    
 
     def display_id(self):
         return f"{self.pk:05}"
