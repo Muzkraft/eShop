@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from pipes import Template
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
@@ -12,6 +13,7 @@ from django.views.generic import CreateView, TemplateView, UpdateView
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from carts.models import Cart
+from common.mixins import CacheMixin
 from orders.models import Order, OrderItem
 from users.forms import ProfileForm, UserLoginForm, UserRegistrationForm
 
@@ -78,7 +80,7 @@ class UserLoginView(LoginView):
         return context
 
 
-class UserProfileView(LoginRequiredMixin, UpdateView):
+class UserProfileView(CacheMixin, LoginRequiredMixin, UpdateView):
     template_name = "users/profile.html"
     form_class = ProfileForm
     success_url = reverse_lazy("users:profile")
@@ -96,17 +98,16 @@ class UserProfileView(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Slastena - личный кабинет"
-        context["orders"] = (
-            Order.objects.filter(user=self.request.user)
-            .prefetch_related(
+        context["title"] = "Slastena - Личный кабинет"
+
+        orders = Order.objects.filter(user=self.request.user).prefetch_related(
                 Prefetch(
                     "orderitem_set",
                     queryset=OrderItem.objects.select_related("product"),
                 )
-            )
-            .order_by("-id")
-        )
+            ).order_by("-id")
+
+        context["orders"] = self.set_get_cache(orders, f'user_{self.request.user.id}_orders', 3600)
         return context
 
 
